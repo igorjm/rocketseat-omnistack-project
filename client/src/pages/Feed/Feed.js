@@ -10,7 +10,7 @@ import comment from '../assets/comment.svg'
 import send from '../assets/send.svg'
 
 class Feed extends Component {
-    state ={
+    state = {
         feed: [],
     }
     
@@ -26,13 +26,13 @@ class Feed extends Component {
         const socket = io('http://localhost:3000')
 
         socket.on('post', newPost => {
-            this.setState({ feed: [newPost, ... this.state.feed] })
+            this.setState({ feed: [newPost, ...this.state.feed] })
         })
 
         socket.on('like', likedPost => {
             this.setState({
                 feed: this.state.map(post => 
-                    post._id == likedPost._id ? likedPost : post
+                    post._id === likedPost._id ? likedPost : post
                 )
             })
         })
