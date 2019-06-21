@@ -33,7 +33,7 @@ class New extends Component {
     }
 
     handleChange = event => {
-        this.setState({ [event.targer.name]: event.target.value })
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     render() {
