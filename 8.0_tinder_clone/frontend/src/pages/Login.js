@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 
-import logo from '../assets/log.svg';
+import api from '../services/api';
 
-export default function Login() {
+import logo from '../assets/logo.svg';
+
+export default function Login({ history }) {
+    const [username, setUsername] = useState('');
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        const response = await api.post('/devs', {
+            username
+        });
+
+        const { id } = response.data;
+
+        history.push(`/main/${id}`);
+    }
+
     return (
-        <img src={logo} alt="Tindev" />
+        <div className="login-container">
+            <form onSubmit={handleSubmit}>
+                <img src={logo} alt="Tindev" />
+                <input 
+                    placeholder="Digite seu usuário no Github"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                />
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     );
 }
